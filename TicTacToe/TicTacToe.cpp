@@ -292,10 +292,10 @@ int main() {
 		displayGrid();
 		int result = gameState(posTTT);
 		if (result == 1) {
-			cout << endl << ">> " << opponent << " win! <<" << endl;
+			cout << endl << ">> Computer win! <<" << endl;
 		}
 		else if (result == -1) {
-			cout << endl << ">> " << player << " win! <<" << endl;
+			cout << endl << ">> Player win! <<" << endl;
 		}
 		else if (result == 0) {
 			cout << endl << ">> Tie <<" << endl;
