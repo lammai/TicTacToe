@@ -75,9 +75,6 @@ bool checkMove(string move) {
 	}
 }
 
-
-
-
 //  0 = tie
 //  1 = AI winning
 // -1 = player winning
@@ -165,6 +162,7 @@ int minimax(char board[3][3], int depth, bool isMaxPlayer) {
 }
 
 pair<int, int> findBestMove(char board[3][3]) {
+	computations = 0;
 	pair<int, int> bestMove = make_pair(-1, -1);
 	int bestVal = -9999;
 
@@ -205,20 +203,19 @@ void playGame() {
 		turn = 0;
 	}
 
-	displayGrid();
-	cout << "Make your move by typing: \"row #,column #\"" << endl;
-
 	// Game loop
 	while (gameState(posTTT) != 1 && gameState(posTTT) != -1 && !isFull(posTTT)) {
 		switch (turn) {
 		case 0:	// AI turn
 		{
-			if (isInit)	// if this is the first move for AI, move randomly
+			if (isInit) {	// if this is the first move for AI, move randomly
 				posTTT[rand() % 3][rand() % 3] = opponent;
+				isInit = false;
+			}
 			else {
 				pair<int, int> aiMove = findBestMove(posTTT);
 				posTTT[aiMove.first][aiMove.second] = opponent;
-				isInit = false;
+				
 			}
 			if (gameState(posTTT) == 1 || gameState(posTTT) == -1 || isFull(posTTT)) {
 				break;
@@ -231,6 +228,11 @@ void playGame() {
 		}
 		case 1:	// player turn
 		{
+			if (isInit) {
+				displayGrid();
+				cout << "Make your move by typing: \"row #,column #\"" << endl;
+				isInit = false;
+			}
 			string currentMove;
 			cout << ">> " << player << " move: ";
 			cin >> currentMove;
@@ -255,13 +257,11 @@ void playGame() {
 
 			}
 			posTTT[x][y] = player;
-			isInit = false;
 			if (gameState(posTTT) == 1 || gameState(posTTT) == -1 || isFull(posTTT)) {
 				break;
 			}
 			else {
 				turn = 1 - turn;
-				displayGrid();
 			}
 		}
 		}
