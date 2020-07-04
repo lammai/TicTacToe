@@ -215,7 +215,6 @@ void playGame() {
 			else {
 				pair<int, int> aiMove = findBestMove(posTTT);
 				posTTT[aiMove.first][aiMove.second] = opponent;
-				
 			}
 			if (gameState(posTTT) == 1 || gameState(posTTT) == -1 || isFull(posTTT)) {
 				break;
@@ -254,7 +253,6 @@ void playGame() {
 				}
 				x = stoi(currentMove.substr(0, 1));
 				y = stoi(currentMove.substr(2, 1));
-
 			}
 			posTTT[x][y] = player;
 			if (gameState(posTTT) == 1 || gameState(posTTT) == -1 || isFull(posTTT)) {
@@ -300,7 +298,6 @@ int main() {
 		else if (result == 0) {
 			cout << endl << ">> Tie <<" << endl;
 		}
-
 		cout << "Play again? (Y/N)" << endl;
 		cin >> playAgain;
 		playAgain = toupper(playAgain[0]);
